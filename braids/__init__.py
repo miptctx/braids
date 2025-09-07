@@ -3,8 +3,8 @@ from braids.prints import basis2str
 
 
 def _show(*args):
-  show(latex(*args))
-  # show(*args)
+  # show(latex(*args))
+  show(*args)
 
 
 def map(in_basis:tuple, diagonal:set, F=QQ):
@@ -80,7 +80,7 @@ def map(in_basis:tuple, diagonal:set, F=QQ):
     if out_basis[i] in in_basis:
       image[i] = 1
 
-    vectors_images.append(image)  
+    vectors_images.append(image)
 
   vectors_images[t_left_index ][t_left_index ] = image_left[0]
   vectors_images[t_left_index ][t_right_index] = image_left[1]
@@ -98,9 +98,9 @@ def map(in_basis:tuple, diagonal:set, F=QQ):
 
   map_matrix = matrix(F, map_matrix).transpose()
 
-  print(basis2str(in_basis), '-->', basis2str(out_basis))
-  _show(map_matrix)
-  print("")
+  # print(basis2str(in_basis), '-->', basis2str(out_basis))
+  # _show(map_matrix)
+  # print("")
 
   return tuple(out_basis), map_matrix
 
@@ -115,7 +115,7 @@ def braiding(in_basis:tuple, *diagonals, F=QQ):
   return in_basis, maps_matrix
 
 
-def knotting_max(in_basis:tuple, triangle:set, p_4, F=QQ, param=1):
+def knotting_max(in_basis:tuple, triangle:set, p_4, F=QQ, param=1, vars=None):
   p_1, p_2, p_3 = tuple(sorted(triangle))
 
   t_124 = {p_1, p_2, p_4}
@@ -134,9 +134,9 @@ def knotting_max(in_basis:tuple, triangle:set, p_4, F=QQ, param=1):
 
     vectors_images.append(image)
 
-  vectors_images[t_index][out_basis.index(t_124)] = param * -p_1*p_3/(p_1*p_2-p_2*p_2-p_1*p_3+p_2*p_3)
-  vectors_images[t_index][out_basis.index(t_234)] = param *  p_1*p_2/(p_1*p_2-p_1*p_3-p_2*p_3+p_3*p_3)
-  vectors_images[t_index][out_basis.index(t_134)] = param *  p_2*p_3/(p_1*p_1-p_1*p_2-p_1*p_3+p_2*p_3)
+  vectors_images[t_index][out_basis.index(t_124)] = param * ( (-p_1*p_3/(p_1*p_2-p_2*p_2-p_1*p_3+p_2*p_3) ) if vars is None else vars[0])
+  vectors_images[t_index][out_basis.index(t_234)] = param * ( ( p_1*p_2/(p_1*p_2-p_1*p_3-p_2*p_3+p_3*p_3) ) if vars is None else vars[1])
+  vectors_images[t_index][out_basis.index(t_134)] = param * ( ( p_2*p_3/(p_1*p_1-p_1*p_2-p_1*p_3+p_2*p_3) ) if vars is None else vars[2])
 
   indices = sorted(range(len(out_basis)), key=lambda i: tuple(sorted(out_basis[i])))
 
@@ -148,14 +148,14 @@ def knotting_max(in_basis:tuple, triangle:set, p_4, F=QQ, param=1):
 
   map_matrix = matrix(F, map_matrix).transpose()
 
-  print(basis2str(in_basis), '-->', basis2str(out_basis))
-  _show(map_matrix)
-  print("")
+  # print(basis2str(in_basis), '-->', basis2str(out_basis))
+  # _show(map_matrix)
+  # print("")
 
   return tuple(out_basis), map_matrix
 
 
-def knotting_min(in_basis:tuple, p_4, F=QQ, param=1):
+def knotting_min(in_basis:tuple, p_4, F=QQ, param=1, vars=None):
   triangle = set()
   for vect in in_basis:
     if p_4 in vect:
@@ -189,9 +189,9 @@ def knotting_min(in_basis:tuple, p_4, F=QQ, param=1):
 
     vectors_images.append(image)
 
-  vectors_images[t_124_index][out_basis.index(t_123)] = param
-  vectors_images[t_234_index][out_basis.index(t_123)] = param
-  vectors_images[t_134_index][out_basis.index(t_123)] = param
+  vectors_images[t_124_index][out_basis.index(t_123)] = param if vars is None else vars[0]
+  vectors_images[t_234_index][out_basis.index(t_123)] = param if vars is None else vars[1]
+  vectors_images[t_134_index][out_basis.index(t_123)] = param if vars is None else vars[2]
 
   indices = sorted(range(len(out_basis)), key=lambda i: tuple(sorted(out_basis[i])))
 
@@ -203,8 +203,8 @@ def knotting_min(in_basis:tuple, p_4, F=QQ, param=1):
 
   map_matrix = matrix(F, map_matrix).transpose()
 
-  print(basis2str(in_basis), '=', basis2str(out_basis))
-  _show(map_matrix)
-  print("")
+  # print(basis2str(in_basis), '=', basis2str(out_basis))
+  # _show(map_matrix)
+  # print("")
 
   return tuple(out_basis), map_matrix
