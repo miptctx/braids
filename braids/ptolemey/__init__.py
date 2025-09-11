@@ -31,8 +31,10 @@ def map(in_basis:tuple, in_edges:dict, diagonal:set, F=QQ):
   y = (a*c+b*d)/x
 
   out_edges = dict(in_edges)
+  assert edge_old in out_edges
   del out_edges[edge_old]
 
+  assert edge_new not in out_edges
   out_edges[edge_new] = y
 
   t_old_1 = {p_i, p_k, p_j}
