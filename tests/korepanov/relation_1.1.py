@@ -1,3 +1,7 @@
+############################################
+# This calculation is not correct probably #
+############################################
+
 from sage.all import *
 from braids.korepanov import braiding
 from braids.utils import sort_triangulation

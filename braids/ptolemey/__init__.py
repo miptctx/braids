@@ -1,5 +1,4 @@
 from sage.all import *
-from braids.prints import basis2str
 
 
 def _show(*args):
@@ -51,7 +50,7 @@ def map(in_basis:tuple, in_edges:dict, diagonal:set, F=QQ):
 
   out_basis = tuple(sorted(out_basis, key=lambda s: str(tuple(sorted(s)))))
 
-  return out_basis, out_edges
+  return out_basis, dict(sorted(out_edges.items()))
 
 
 def braiding(in_basis:tuple, edges:dict, *diagonals):

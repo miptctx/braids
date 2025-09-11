@@ -1,15 +1,4 @@
-from sage.all import var, assume
-
-
-# This function creates variables z_i
-def make_vars_for_points(*points):
-  for i in range(0, len(points)):
-    var_name = f"z_{points[i]}"
-    assert var_name not in globals()
-    globals()[var_name] = var(var_name)
-
-  for i in range(0, len(points) - 1):
-    assume(globals()[f"z_{points[i]}"] < globals()[f"z_{points[i+1]}"])
+from sage.all import var
 
 
 def make_init_vars_for_edges(basis:tuple):
@@ -30,11 +19,11 @@ def make_init_vars_for_edges(basis:tuple):
   assert len(edges) == (len(basis) + 1 + len(points) - 2)   # this formula was given from the eulier characteristic of planar graph: v-e+f=2.
 
   edges_dict = dict()
-  for i, e in enumerate(edges):
+  for i, e in enumerate(sorted(edges)):
     l_i = var(f"l_{i+1}")
     edges_dict.update({e: l_i})
 
-  return edges_dict
+  return dict(sorted(edges_dict.items()))
 
 
 def make_subs_dict_for_edges(init_edges:dict, subs_edges:dict):
@@ -46,4 +35,4 @@ def make_subs_dict_for_edges(init_edges:dict, subs_edges:dict):
   for k, v in subs_edges.items():
     result[k] = result[k].subs(subs_dict)
 
-  return result
+  return dict(sorted(result.items()))
