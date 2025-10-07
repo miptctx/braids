@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: Braids
+Version: 3.0.0
+Summary: Calcualtions of braid invariants
+Home-page: 
+Author: Illia Rohozhkin
+Author-email: systemmind@ukr.net
+Dynamic: author
+Dynamic: author-email
+Dynamic: summary
