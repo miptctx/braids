@@ -1,5 +1,5 @@
 from sage.all import *
-from braids.ptolemey import braiding
+from braids.ptolemey.sedrakyan import braiding
 from braids.ptolemey.utils import make_init_vars_for_edges, make_subs_dict_for_edges
 from braids.utils import sort_triangulation
 

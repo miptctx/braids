@@ -76,10 +76,10 @@ def knotting_max(in_basis:tuple, triangle_1:set, p_5, triangle_2:set, p_6, F=QQ,
     vectors_images.append(image)
 
   vectors_images[t_index][out_basis.index(t_a_1)] = param * ( (a_1 if is_diagonal_major else a_3) if vars is None else vars[0] )
-  vectors_images[t_index][out_basis.index(t_a_2)] = param * (  a_2 if vars is None else vars[0] )
-  vectors_images[t_index][out_basis.index(t_b_1)] = param * (    0 if vars is None else vars[0] )
-  vectors_images[t_index][out_basis.index(t_b_2)] = param * (    0 if vars is None else vars[0] )
-  vectors_images[t_index][out_basis.index(t_b_3)] = param * (    0 if vars is None else vars[0] )
+  vectors_images[t_index][out_basis.index(t_a_2)] = param * (  a_2 if vars is None else vars[1] )
+  vectors_images[t_index][out_basis.index(t_b_1)] = param * (    0 if vars is None else vars[2] )
+  vectors_images[t_index][out_basis.index(t_b_2)] = param * (    0 if vars is None else vars[3] )
+  vectors_images[t_index][out_basis.index(t_b_3)] = param * (    0 if vars is None else vars[4] )
 
   indices = sorted(range(len(out_basis)), key=lambda i: tuple(sorted(out_basis[i])))
 
@@ -99,7 +99,7 @@ def knotting_max(in_basis:tuple, triangle_1:set, p_5, triangle_2:set, p_6, F=QQ,
 
 
 # p_5 dissapears first, then p_6
-def knotting_min(in_basis:tuple, p_5, p_6, F=QQ, param=1, vars=None):
+def knotting_min(in_basis:tuple, p_5, p_6, F=QQ, param=1, d=None, vars=None):
 
   t_around_p_5 = set()
   t_around_p_6 = set()

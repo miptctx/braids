@@ -1,6 +1,6 @@
 from sage.all import *
 from braids.ptolemey import braiding
-from braids.ptolemey.utils import make_init_vars_for_edges, make_vars_for_points, make_subs_dict_for_edges
+from braids.ptolemey.utils import make_init_vars_for_edges, make_subs_dict_for_edges
 from braids.utils import sort_triangulation
 
 
@@ -26,6 +26,9 @@ t, edges_result = braiding(T, edges_init, {z_5,z_8},{z_5,z_7},{z_4,z_7},{z_4,z_6
 assert T == t
 
 edges_result_subs = make_subs_dict_for_edges(edges_init, edges_result)
+
+print('################ EDGES ##################')
+print(edges_result)
 
 # print('################')
 # show(edges_result_subs)

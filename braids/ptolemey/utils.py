@@ -26,13 +26,23 @@ def make_init_vars_for_edges(basis:tuple):
   return dict(sorted(edges_dict.items()))
 
 
-def make_subs_dict_for_edges(init_edges:dict, subs_edges:dict):
+def make_subs_dict_for_edges(init_edges:dict, subs_edges:dict, diff=False):
   subs_dict = {}
   for i, (k, v) in enumerate(init_edges.items()):
-    subs_dict.update({v: i+1})
+    # print(v, k, "=", i+1 if not diff else (max(k) - min(k)))
+    subs_dict.update({v: i+1 if not diff else (max(k) - min(k))})
 
   result = dict(subs_edges)
   for k, v in subs_edges.items():
     result[k] = result[k].subs(subs_dict)
 
   return dict(sorted(result.items()))
+
+
+def make_subs_matrix_for_edges(init_edges:dict, m, diff=False):
+  subs_dict = {}
+  for i, (k, v) in enumerate(init_edges.items()):
+    # print(v, k, "=", i+1 if not diff else (max(k) - min(k)))
+    subs_dict.update({v: i+1 if not diff else (max(k) - min(k))})
+
+  return m.subs(subs_dict)

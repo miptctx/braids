@@ -1,6 +1,6 @@
-def stringify_triangles_pretty(trs, prefix="", justify=4):
-  return prefix + "  ".join([
-    "".join(
+def stringify_triangles_pretty(trs, prefix="", justify=8):
+  return prefix + "    ".join([
+    " ".join(
       [str(y) for y in x]
     ).ljust(justify) for x in [tuple(sorted(t)) for t in trs]
   ])
