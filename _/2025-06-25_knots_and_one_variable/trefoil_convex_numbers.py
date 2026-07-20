@@ -1,0 +1,33 @@
+from sage.all import *
+from braids import knotting_max, knotting_min, braiding
+from braids.utils import sort_triangulation
+from braids.prints import print_triangles_pretty
+
+F = QQ
+
+P = sort_triangulation({1,2,3})
+
+t, matrix_max_4 = knotting_max(P, {1,2,3}, 4, F=F)
+t, matrix_max_5 = knotting_max(t, {2,3,4}, 5, F=F)
+t, matrix_max_6 = knotting_max(t, {1,4,3}, 6, F=F)
+t, matrix_max_7 = knotting_max(t, {1,3,6}, 7, F=F)
+
+t, matrix_braid = braiding(t,
+                           (3,4),(1,6),(4,5),(2,4),(6,7),(3,6),(1,4),
+                           (6,7),(2,5),(4,6),(1,6),
+                           (1,4),(3,5),(4,7),
+                           F=F)
+
+t, matrix_min_4 = knotting_min(t, 4, F=F)
+t, matrix_min_6 = knotting_min(t, 6, F=F)
+t, matrix_min_7 = knotting_min(t, 7, F=F)
+t, matrix_min_5 = knotting_min(t, 5, F=F)
+
+m = matrix_min_5 * matrix_min_7 * matrix_min_6 * matrix_min_4 \
+  * matrix_braid \
+  * matrix_max_7 * matrix_max_6 * matrix_max_5 * matrix_max_4
+
+assert P == t
+
+print("Result matrix")
+show(m)
