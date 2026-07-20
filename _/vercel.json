@@ -1,3 +1,3 @@
 {
-  "buildCommand": "npx vitepress build"
+  "buildCommand": "npx run docs:build"
 }
